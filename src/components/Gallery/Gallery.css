@@ -1,0 +1,160 @@
+:root {
+  --bg-beige: #F4F1EA;
+  --border-rust: #7C2A26;
+  --text-dark: #1A1A1A;
+  --border-subtle: #E2DDD5;
+}
+
+.gallery-section {
+  width: 100vw;
+  background-color: var(--bg-beige);
+  padding: 6rem 2rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.gallery-container {
+  max-width: 1350px;
+  min-height: 600px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual Floating Image Frames */
+.gallery-item {
+  position: absolute;
+  overflow: hidden;
+  background-color: #FAF8F5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-subtle);
+  z-index: 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Adjusted positioning so elements don't collide */
+.item-1 { width: 90px; height: 90px; top: 5%; left: 12%; }
+.item-2 { width: 170px; height: 210px; top: 22%; left: 4%; }
+.item-3 { width: 220px; height: 280px; top: -5%; left: 30%; }
+.item-4 { width: 180px; height: 220px; top: 10%; right: 28%; }
+.item-5 { width: 100px; height: 100px; top: 25%; right: 12%; }
+.item-6 { width: 240px; height: 320px; bottom: -5%; left: 22%; }
+.item-7 { width: 140px; height: 140px; bottom: 8%; left: 42%; z-index: 1; } /* Shifted slightly left & sized cleanly */
+.item-8 { width: 85px; height: 85px; bottom: 20%; right: 15%; }
+
+/* Central Instagram Action Box (Given higher z-index & shifted right) */
+.instagram-card-box {
+  position: absolute;
+  bottom: 8%;
+  right: 23%; /* Shifted right away from item-7 */
+  width: 250px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  z-index: 10; /* Ensures it sits cleanly on top */
+}
+
+.instagram-card-content {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.insta-top-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.insta-icon {
+  color: var(--text-dark);
+}
+
+.insta-brand-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  letter-spacing: 0.03em;
+}
+
+.insta-handle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #666;
+  letter-spacing: 0.05em;
+}
+
+.insta-follow-btn {
+  display: block;
+  width: 100%;
+  padding: 0.85rem 0;
+  background-color: transparent;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--text-dark);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.insta-follow-btn:hover {
+  background-color: var(--border-rust);
+  color: #ffffff;
+  border-color: var(--border-rust);
+}
+
+/* Responsive adjustment for mobile devices */
+@media (max-width: 1024px) {
+  .gallery-container {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+  .gallery-item {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100% !important;
+    height: 200px !important;
+  }
+  .instagram-card-box {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    grid-column: span 2;
+  }
+}
