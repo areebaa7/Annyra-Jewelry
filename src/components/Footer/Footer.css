@@ -162,17 +162,30 @@
 @media (max-width: 968px) {
   .footer-section {
     padding: 3rem 1.5rem 1rem 1.5rem;
+    width: 100%;
+    overflow-x: hidden; /* Prevents overflow causing side-scrolling */
   }
+
   .footer-top-row {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+
   .newsletter-form {
     flex-direction: column;
     align-items: stretch;
   }
+
   .footer-contacts {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  /* Keeps font size massive while dynamically scaling to fit mobile screen width bounds */
+  .giant-brand-title span {
+    font-size: 19vw; 
+    letter-spacing: -0.04em;
+    width: 100%;
+    text-align: center;
   }
 }

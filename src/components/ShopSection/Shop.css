@@ -1,0 +1,321 @@
+:root {
+  --bg-beige: #F4F1EA;
+  --bg-rust: #7C2A26;
+  --text-dark: #1A1A1A;
+  --border-subtle: #E2DDD5;
+}
+
+.shop-page-section {
+  width: 100vw;
+  background-color: var(--bg-beige);
+  padding: 6rem 4rem 4rem 4rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+}
+
+.shop-page-container {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page Heading Title */
+.shop-page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* Circular Category Row */
+.shop-categories-circles {
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.category-circle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.category-circle-item:hover {
+  transform: translateY(-4px);
+}
+
+.circle-img-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background-color: #FAF8F5;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.3s ease;
+}
+
+.category-circle-item.selected .circle-img-wrap {
+  border: 2px solid var(--bg-rust);
+}
+
+.circle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.circle-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--text-dark);
+  letter-spacing: 0.03em;
+}
+
+/* Shop Toolbar */
+.shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.25rem 0;
+  margin-bottom: 3rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.sorting-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--text-dark);
+  padding: 0.5rem 1.2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background-color: var(--text-dark);
+  color: #fff;
+}
+
+/* Products Grid - Fixed Card Proportion / Height */
+.shop-main-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.shop-grid-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 1.25rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  min-height: 420px; /* Balanced, non-elongated box height */
+}
+
+.shop-card-image-box {
+  width: 100%;
+  height: 240px; /* Balanced aspect ratio for product cards */
+  background-color: #FAF8F5;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.shop-grid-card:hover .shop-card-image-box img {
+  transform: scale(1.04);
+}
+
+/* Product Badges */
+.product-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--text-dark);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.6rem;
+  z-index: 2;
+}
+
+.product-badge.secondary {
+  right: auto;
+  left: 10px;
+}
+
+.shop-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.card-cat-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: #888;
+}
+
+.card-item-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.card-item-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: #666;
+  line-height: 1.35;
+  margin: 0.2rem 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+.price-box {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+
+.current-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.old-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.color-dots {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.star-rating {
+  color: #d4af37;
+  font-size: 0.7rem;
+}
+
+/* Pagination */
+.shop-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.page-num {
+  width: 38px;
+  height: 38px;
+  background-color: transparent;
+  border: 1px solid var(--border-subtle);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-num.active, .page-num:hover {
+  background-color: var(--text-dark);
+  color: #fff;
+  border-color: var(--text-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .shop-main-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-page-section {
+    padding: 4rem 1.5rem 0 1.5rem;
+  }
+  .shop-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .shop-categories-circles {
+    gap: 1.5rem;
+  }
+  .circle-img-wrap {
+    width: 75px;
+    height: 75px;
+  }
+}

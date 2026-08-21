@@ -7,12 +7,12 @@
 
 .gallery-section {
   width: 100vw;
-  background-color: var(--bg-beige);
+  background-color: var(--bg-beige); /* Solid background prevents transparency bleed-through */
   padding: 6rem 2rem;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  z-index: 5;
+  z-index: 20; /* Higher z-index ensures it sits securely above the hero and shop sections */
 }
 
 .gallery-container {
@@ -54,14 +54,14 @@
 .item-4 { width: 180px; height: 220px; top: 10%; right: 28%; }
 .item-5 { width: 100px; height: 100px; top: 25%; right: 12%; }
 .item-6 { width: 240px; height: 320px; bottom: -5%; left: 22%; }
-.item-7 { width: 140px; height: 140px; bottom: 8%; left: 42%; z-index: 1; } /* Shifted slightly left & sized cleanly */
+.item-7 { width: 140px; height: 140px; bottom: 8%; left: 42%; z-index: 1; }
 .item-8 { width: 85px; height: 85px; bottom: 20%; right: 15%; }
 
-/* Central Instagram Action Box (Given higher z-index & shifted right) */
+/* Central Instagram Action Box */
 .instagram-card-box {
   position: absolute;
   bottom: 8%;
-  right: 23%; /* Shifted right away from item-7 */
+  right: 23%;
   width: 250px;
   background-color: #ffffff;
   border: 1px solid var(--border-subtle);
@@ -69,7 +69,7 @@
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-  z-index: 10; /* Ensures it sits cleanly on top */
+  z-index: 10;
 }
 
 .instagram-card-content {
@@ -128,7 +128,7 @@
   border-color: var(--border-rust);
 }
 
-/* Responsive adjustment for mobile devices */
+/* Responsive adjustment */
 @media (max-width: 1024px) {
   .gallery-container {
     flex-direction: column;

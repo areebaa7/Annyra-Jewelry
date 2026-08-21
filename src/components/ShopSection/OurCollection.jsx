@@ -2,44 +2,56 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import './OurCollection.css';
 
-// 8 Fine Jewelry Categories with accurately matched imagery
+// Automatically import local category images using Vite's glob loader
+const collectionModules = {
+  Necklaces: import.meta.glob('../../assets/Categories/necklace/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Earrings: import.meta.glob('../../assets/Categories/Earrings/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Bangles: import.meta.glob('../../assets/Categories/Bangles/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Bracelets: import.meta.glob('../../assets/Categories/Bracelets/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Rings: import.meta.glob('../../assets/Categories/Rings/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Pendants: import.meta.glob('../../assets/Categories/Pendants/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Sets: import.meta.glob('../../assets/Categories/Sets/*.{png,jpg,jpeg,webp}', { eager: true }),
+  Brooches: import.meta.glob('../../assets/Categories/Brooches/*.{png,jpg,jpeg,webp}', { eager: true }),
+};
+
+// Helper to pull the first image from each folder, falling back to Unsplash if a folder is empty
+const getFolderImg = (categoryName, fallbackUrl) => {
+  const modules = collectionModules[categoryName] || {};
+  const keys = Object.keys(modules);
+  if (keys.length > 0) {
+    return modules[keys[0]].default;
+  }
+  return fallbackUrl;
+};
+
+// 8 Fine Jewelry Categories utilizing your local folder assets for Necklaces, Earrings, Bangles, Bracelets, and Brooches
 const collectionItems = [
-  { id: 1, title: 'Necklaces', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600' },
-  { id: 2, title: 'Earrings', image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=600' },
-  { id: 3, title: 'Bangles', image: 'https://images.unsplash.com/photo-1611591470712-304b419ac83b?auto=format&fit=crop&q=80&w=600' }, // Gold Bangles
-  { id: 4, title: 'Bracelets', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600' },
+  { id: 1, title: 'Necklaces', image: getFolderImg('Necklaces', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=600') },
+  { id: 2, title: 'Earrings', image: getFolderImg('Earrings', 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=600') },
+  { id: 3, title: 'Bangles', image: getFolderImg('Bangles', 'https://images.unsplash.com/photo-1611591470712-304b419ac83b?auto=format&fit=crop&q=80&w=600') },
+  { id: 4, title: 'Bracelets', image: getFolderImg('Bracelets', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600') },
   { id: 5, title: 'Rings', image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600' },
   { id: 6, title: 'Pendants', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600' },
   { id: 7, title: 'Jewelry Sets', image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&q=80&w=600' },
-  { id: 8, title: 'Brooches', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600' }, // Detailed statement brooch piece
+  { id: 8, title: 'Brooches', image: getFolderImg('Brooches', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600') },
 ];
 
 const OurCollection = () => {
   return (
-    <>
-      {/* SEO Metadata for Collection Page */}
-      <div style={{ display: 'none' }}>
-        <title>Fine Jewelry Collection | Necklaces, Rings & Sets | Anny Jewelry</title>
-        <meta 
-          name="description" 
-          content="Explore Anny Jewelry's exclusive collections including luxury necklaces, diamond rings, elegant earrings, gold bangles, and bespoke jewelry sets crafted for timeless style." 
-        />
-        <meta name="keywords" content="luxury necklaces, fine rings, gold bangles, diamond earrings, luxury jewelry sets, bespoke pendants" />
-      </div>
-
-      <section id="shop" className="shop-section">
+    <motion.section 
+      className="shop-section collection-stack-section"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.1 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="shop-stack-frame">
         <div className="shop-container">
           
-          {/* Section Heading */}
-          <motion.h2 
-            className="shop-heading"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            Our Collection
-          </motion.h2>
+          {/* Section Heading Bar */}
+          <div className="collection-header-bar">
+            <h2 className="shop-heading collection-header-title">Our Collection</h2>
+          </div>
 
           <div className="shop-rows-wrapper">
             
@@ -80,7 +92,7 @@ const OurCollection = () => {
               <div className="shop-promo-card">
                 <div className="promo-content">
                   <h3 className="promo-title">
-                    We adorn you with Top notch Jewelry that speaks Class and Style.
+                    We adorn you with top notch Jewelry that speaks class and style.
                   </h3>
                   <p className="promo-subtitle">Order yours at the best price here</p>
                   <a href="#store" className="promo-store-btn">Explore</a>
@@ -116,8 +128,8 @@ const OurCollection = () => {
           </div>
 
         </div>
-      </section>
-    </>
+      </div>
+    </motion.section>
   );
 };
 

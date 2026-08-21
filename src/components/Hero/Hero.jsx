@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Search, X, ArrowRight, Menu as MenuIcon } from 'lucide-react';
 import './Hero.css';
 import heroImage from '../../assets/hero-model.jpg'; 
@@ -26,28 +27,7 @@ const itemVariants = {
 const Hero = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 968);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-
-  const desktopOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const desktopScale = useTransform(scrollYProgress, [0, 0.7], [1, 0.96]);
-
-  const heroOpacity = isMobile ? 1 : desktopOpacity;
-  const heroScale = isMobile ? 1 : desktopScale;
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -58,24 +38,31 @@ const Hero = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
+  const handleShopClick = (e) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    navigate('/shop');
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    navigate('/');
+  };
+
   return (
     <motion.section 
-      ref={heroRef}
       className="anny-hero-section"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      style={{ opacity: heroOpacity, scale: heroScale }}
     >
-      {/* Outer Burgundy Border Frame */}
       <div className="hero-border-frame">
-
-        {/* --- DEFAULT HERO VIEW --- */}
         <div className="hero-view-container">
-          {/* Left Content Side (Beige Section) */}
           <div className="hero-left-col">
             <motion.div className="top-brand-row" variants={itemVariants}>
-              <span className="store-logo">ANNY</span>
+              <a href="/" onClick={handleLogoClick} style={{ textDecoration: 'none' }}>
+                <span className="store-logo">ANNY</span>
+              </a>
               <span className="top-subtext">FINE JEWELRY<br />SINCE 2009</span>
             </motion.div>
 
@@ -96,7 +83,6 @@ const Hero = () => {
             </motion.p>
           </div>
 
-          {/* Right Image Side */}
           <div className="hero-right-col">
             <motion.img 
               src={heroImage} 
@@ -109,7 +95,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* --- SHUTTER DOWN MENU OVERLAY --- */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
@@ -123,14 +108,12 @@ const Hero = () => {
                 <div className="top-brand-row">
                   <span className="store-logo">ANNY</span>
                 </div>
-
                 <div className="menu-links-list">
-                  <a href="#shop" className="menu-link">SHOP</a>
-                  <a href="#about-us" className="menu-link">ABOUT US</a>
+                  <a href="/shop" onClick={handleShopClick} className="menu-link">SHOP</a>
+                  <a href="#about-us" onClick={() => { setIsMenuOpen(false); navigate('/'); }} className="menu-link">ABOUT US</a>
                   <a href="#contact" className="menu-link">CONTACT</a>
                   <a href="#blog" className="menu-link">BLOG</a>
                 </div>
-
                 <div className="menu-footer-info">
                   <a href="mailto:shop@anny.com" className="menu-email">SHOP@ANNY.COM</a>
                   <p className="menu-phone">+33 1 42 68 53 90</p>
@@ -146,7 +129,6 @@ const Hero = () => {
                   </div>
                   <img src={inspirationImage} alt="Inspiration" className="menu-card-img" />
                 </a>
-
                 <a href="#care-guide" className="menu-card-link">
                   <div className="menu-card-content">
                     <span>CARE GUIDE</span>
@@ -159,7 +141,6 @@ const Hero = () => {
           )}
         </AnimatePresence>
 
-        {/* --- SEARCH POPUP OVERLAY (Click outside to close) --- */}
         <AnimatePresence>
           {isSearchOpen && (
             <motion.div 
@@ -174,37 +155,20 @@ const Hero = () => {
             >
               <div className="search-input-wrapper">
                 <Search size={18} className="search-bar-icon" />
-                <input 
-                  type="text" 
-                  placeholder="Search..." 
-                  autoFocus 
-                  className="search-bar-input"
-                />
+                <input type="text" placeholder="Search..." autoFocus className="search-bar-input" />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Floating Action Buttons */}
         <div className="nav-action-buttons">
           <button className="icon-btn search-btn" onClick={toggleSearch} aria-label="Search">
             {isSearchOpen ? <X size={18} /> : <Search size={18} />}
           </button>
           <button className="menu-btn" onClick={toggleMenu} aria-label="Toggle Menu">
-            {isMenuOpen ? (
-              <>
-                <X size={16} />
-                <span>CLOSE</span>
-              </>
-            ) : (
-              <>
-                <MenuIcon size={16} />
-                <span>MENU</span>
-              </>
-            )}
+            {isMenuOpen ? <><X size={16} /><span>CLOSE</span></> : <><MenuIcon size={16} /><span>MENU</span></>}
           </button>
         </div>
-
       </div>
     </motion.section>
   );

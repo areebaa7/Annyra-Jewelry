@@ -1,0 +1,208 @@
+:root {
+  --bg-beige: #F4F1EA;
+  --bg-rust: #7C2A26;
+  --text-dark: #1A1A1A;
+  --border-subtle: #E2DDD5;
+}
+
+.bestsellers-section {
+  width: 100vw;
+  background-color: var(--bg-beige);
+  padding: 8rem 4rem 6rem 4rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+}
+
+.bestsellers-container {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Left Side: Unified Card with Sharp Black Border */
+.unified-bestsellers-card {
+  flex: 1.8;
+  height: 885px; /* Fixed height to match the exact total height of the 3 stacked rust blocks below */
+  background-color: #ffffff;
+  border: 1.5px solid #1A1A1A;
+  padding: 3rem 2.5rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+/* Heading in Rust color */
+.bestsellers-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  color: var(--bg-rust);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.02em;
+}
+
+.bestsellers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem 1.5rem;
+}
+
+.bs-product-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.bs-img-box {
+  width: 85px;
+  height: 105px;
+  background-color: #FAF8F5;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.bs-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.bs-product-item:hover .bs-img-box img {
+  transform: scale(1.04);
+}
+
+.bs-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bs-category-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: #999;
+}
+
+.bs-item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.bs-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-dark);
+  margin-top: 0.15rem;
+}
+
+/* Right Side: Uniform width column shifted up at the top, perfectly leveling at the bottom */
+.overlapping-promo-column {
+  width: 380px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: -3.5rem; /* Extends upward above the white box */
+  margin-left: -3rem; 
+  position: relative;
+  z-index: 10;
+  box-shadow: -15px 25px 50px rgba(0, 0, 0, 0.25);
+  background-color: var(--bg-rust);
+}
+
+.tall-promo-block {
+  position: relative;
+  width: 100%;
+  height: 295px; /* 3 blocks × 295px = 885px total height, matching the left card perfectly */
+  background-color: var(--bg-rust);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 2rem 3rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tall-promo-block:last-child {
+  border-bottom: none;
+}
+
+.tall-promo-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.tall-promo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.tall-promo-discount {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.tall-promo-btn {
+  display: inline-block;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 0.45rem 1.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tall-promo-btn:hover {
+  background-color: #ffffff;
+  color: var(--bg-rust);
+  border-color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .bestsellers-container {
+    flex-direction: column;
+  }
+  .unified-bestsellers-card {
+    height: auto;
+  }
+  .overlapping-promo-column {
+    margin-top: 2rem;
+    margin-left: 0;
+    width: 100%;
+  }
+  .bestsellers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .bestsellers-section {
+    padding: 4rem 1.5rem;
+  }
+  .unified-bestsellers-card {
+    padding: 2rem 1.5rem;
+  }
+}

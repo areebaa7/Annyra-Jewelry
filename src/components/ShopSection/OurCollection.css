@@ -5,9 +5,31 @@
   --border-subtle: #E2DDD5;
 }
 
+/* Stacking section sliding over the hero */
+.collection-stack-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bg-rust);
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 5;
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.shop-stack-frame {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-rust);
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
 .shop-section {
   width: 100vw;
-  background-color: var(--bg-rust); /* Whole section background is rust */
+  background-color: var(--bg-rust);
   padding: 6rem 2rem;
   box-sizing: border-box;
   position: relative;
@@ -21,16 +43,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Heading in Beige */
+/* Section Heading */
+.collection-header-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
 .shop-heading {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.2rem, 3.5vw, 3rem);
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: var(--bg-beige); 
-  margin-bottom: 4rem;
+  color: var(--bg-beige);
+  margin: 0;
   text-align: center;
 }
 
@@ -52,7 +83,6 @@
 .shop-category-card {
   background-color: var(--bg-beige);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -79,7 +109,7 @@
   transform: scale(1.04);
 }
 
-/* Category Label in Beige background with Rust text */
+/* Category Label */
 .shop-category-label {
   position: absolute;
   bottom: 1.5rem;
@@ -91,15 +121,13 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   padding: 0.5rem 1.25rem;
-  border-radius: 0px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Promotional Center Card with Beige Background */
+/* Promotional Center Card */
 .shop-promo-card {
   background-color: var(--bg-beige);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0px;
   padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
@@ -125,6 +153,7 @@
   color: var(--text-dark);
   letter-spacing: 0.02em;
   max-width: 320px;
+  margin: 0;
 }
 
 .promo-subtitle {
@@ -132,6 +161,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   color: #666;
+  margin: 0;
 }
 
 .promo-store-btn {
@@ -165,5 +195,8 @@
   }
   .shop-img-frame {
     height: 340px;
+  }
+  .shop-section {
+    padding: 4rem 1.5rem;
   }
 }
