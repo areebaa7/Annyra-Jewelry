@@ -21,4 +21,4 @@ npm install
 npm run dev
 ```
 
-**Live:** [add link if deployed]
+**Live:** : annyra-jewelry.vercel.app
